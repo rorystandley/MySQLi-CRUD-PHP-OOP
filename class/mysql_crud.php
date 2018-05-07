@@ -141,6 +141,7 @@ class Database{
     	// Check to see if the table exists
     	 if($this->tableExists($table)){
     	 	$sql='INSERT INTO `'.$table.'` (`'.implode('`, `',array_keys($params)).'`) VALUES ("' . implode('", "', $params) . '")';
+		 $sql = str_replace('""', 'NULL', $sql); // Replace empty string with NULL
             $this->myQuery = $sql; // Pass back the SQL
             // Make the query to insert to the database
             if($ins = $this->myconn->query($sql)){
